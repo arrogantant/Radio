@@ -19,26 +19,34 @@ import androidx.compose.ui.unit.dp
 import com.example.ainews.ui.theme.AINEWSTheme
 import androidx.activity.viewModels
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AINEWSTheme {
-                // A surface container using the 'background' color from the theme
                 val mainViewModel: MainViewModel by viewModels()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // Column을 사용하여 버튼 포함
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Greeting("Android")
-                        Spacer(modifier = Modifier.height(16.dp)) // Greeting과 Button 사이의 공간을 추가
-                        // 버튼 추가
-                        Button(onClick = { mainViewModel.startStreaming() }) {
-                            Text("Start Radio")
+                        // KBS Radio Button
+                        Button(onClick = { mainViewModel.startStreaming("https://ebsonair.ebs.co.kr/fmradiofamilypc/familypc1m/playlist.m3u8") }) {
+                            Text("EBS Radio")
                         }
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // MBC Radio Button
+                        Button(onClick = { mainViewModel.startStreaming("MBC 스트리밍 URL") }) {
+                            Text("MBC Radio")
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        // SBS Radio Button
+                        Button(onClick = { mainViewModel.startStreaming("SBS 스트리밍 URL") }) {
+                            Text("SBS Radio")
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
             }
